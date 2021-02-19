@@ -95,13 +95,14 @@ func (p *ProductManager) Update(product *datamodels.Product) error{
 	return nil
 }
 
-//
+// 获取单条数据
 func (p ProductManager) Select(productID int64) (productResult *datamodels.Product, err error){
 	if err = p.Conn(); err != nil {
 		return &datamodels.Product{}, err
 	}
 	sql := "select * from" + p.table + "where ID =" + strconv.FormatInt(productID, 10)
 	row, err := p.mysqlConn.Query(sql)
+	defer row.Close()
 	if err != nil {
 		return &datamodels.Product{}, err
 	}
@@ -115,7 +116,25 @@ func (p ProductManager) Select(productID int64) (productResult *datamodels.Produ
 
 }
 
-//
-func (p *ProductManager) SelectAll() ([]*datamodels.Product, error) {
-	return nil, nil
+// 获取所有数据
+func (p *ProductManager) SelectAll() (productArray []*datamodels.Product, errProduct error) {
+	if err := p.Conn(); err != nil {
+		return nil, err
+	}
+	sql := "select * from" + p.table
+	rows, err := p.mysqlConn.Query(sql)
+	defer rows.Close()
+	if err != nil {
+		return nil, err
+	}
+	result := common.GetResultRows(rows)
+	if len(result) == 0 {
+		return nil, nil
+	}
+	for _, v := range result {
+		product := &datamodels.Product{}
+		common.DataToStructByTagSql(v, product)
+		productArray = append(productArray, product)
+	}
+	return
 }
