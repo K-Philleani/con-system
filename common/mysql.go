@@ -3,11 +3,13 @@ package common
 import (
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
+	"log"
 )
 
 // 创建mysql 连接
 func NewMysqlConn() (db *sql.DB, err error){
 	db, err = sql.Open("mysql", "root:123456@tcp(124.70.71.78:3306)/cons?charset=utf8")
+	log.Println("data", err)
 	return
 }
 

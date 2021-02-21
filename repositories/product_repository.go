@@ -47,7 +47,7 @@ func (p *ProductManager) Conn() error{
 // 插入
 func (p *ProductManager) Insert(product *datamodels.Product) (productId int64, err error){
 	if err := p.Conn(); err == nil {
-		return
+		return 0, err
 	}
 	sql := "insert product set productName=?, productNum=?, productImage=?, productUrl=?"
 	stmt, err := p.mysqlConn.Prepare(sql)
