@@ -73,8 +73,19 @@ func insertRowDemo() {
 	fmt.Printf("insert success, the id is: %d\n", theId)
 }
 
-func updateDemo() {
-
+func updateRowDemo() {
+	sqlStr := "update user set age = ? where id = ?"
+	ret, err := db.Exec(sqlStr, 30, 4)
+	if err != nil {
+		fmt.Printf("update failed, err: %v\n", err)
+		return
+	}
+	n, err := ret.RowsAffected()
+	if err != nil {
+		fmt.Printf("get rowsaffected failed, err: %v\n", err)
+		return
+	}
+	fmt.Printf("update success, affected rows: %d\n", n)
 }
 
 func main() {
@@ -87,5 +98,7 @@ func main() {
 	fmt.Println("==========================")
 	queryMultiRowDemo()
 	fmt.Println("==========================")
-	insertRowDemo()
+	//insertRowDemo()
+	fmt.Println("==========================")
+	updateRowDemo()
 }
