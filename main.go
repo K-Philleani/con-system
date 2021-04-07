@@ -88,6 +88,21 @@ func updateRowDemo() {
 	fmt.Printf("update success, affected rows: %d\n", n)
 }
 
+func deleteRowDemo() {
+	sqlStr := "delete from user where id = ?"
+	ret, err := db.Exec(sqlStr, 5)
+	if err != nil {
+		fmt.Printf("delete failed, err: %v\n", err)
+		return
+	}
+	n, err := ret.RowsAffected()
+	if err != nil {
+		fmt.Printf("get rowsaffected failed, err: %v\n", err)
+		return
+	}
+	fmt.Printf("delete success, affected rows: %d\n", n)
+}
+
 func main() {
 	if err := initMysql(); err != nil {
 		fmt.Println("连接数据库失败")
@@ -101,4 +116,6 @@ func main() {
 	//insertRowDemo()
 	fmt.Println("==========================")
 	updateRowDemo()
+	fmt.Println("==========================")
+	deleteRowDemo()
 }
