@@ -1,6 +1,7 @@
 package main
 
 import (
+	"con-system/pkg/sonyflake"
 	"database/sql"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
@@ -9,24 +10,26 @@ import (
 var db *sql.DB
 
 type User struct {
-	id int
+	id   int
 	name string
-	age int
+	age  int
 }
 
-func initMysql() (err error){
-	dsn := "root:123456@tcp(124.70.71.78:3306)/cons"
-	db, err = sql.Open("mysql", dsn)
-	if err != nil {
-		return err
-	}
-	err = db.Ping()
-	if err != nil {
-		return err
-	}
-	return
-}
+// 初始化数据库
+//func initMysql() (err error){
+//	dsn := "root:123456@tcp(124.70.71.78:3306)/cons"
+//	db, err = sql.Open("mysql", dsn)
+//	if err != nil {
+//		return err
+//	}
+//	err = db.Ping()
+//	if err != nil {
+//		return err
+//	}
+//	return
+//}
 
+// 查询单条数据
 func queryRowDemo() {
 	sqlStr := "select id, name, age from user where id = ?"
 	var u User
@@ -38,6 +41,7 @@ func queryRowDemo() {
 	fmt.Printf("id: %d name: %s age:%d\n", u.id, u.name, u.age)
 }
 
+// 查询多条数据
 func queryMultiRowDemo() {
 	sqlStr := "select id, name, age from user where id > ?"
 	rows, err := db.Query(sqlStr, 0)
@@ -104,18 +108,14 @@ func deleteRowDemo() {
 }
 
 func main() {
-	if err := initMysql(); err != nil {
-		fmt.Println("连接数据库失败")
+	if err := sonyflake.Init(1); err != nil {
+		fmt.Printf("init snowflake failed, err:%v\n", err)
+		return
 	}
-	defer db.Close()
-	fmt.Println("数据库连接成功")
-	queryRowDemo()
-	fmt.Println("==========================")
-	queryMultiRowDemo()
-	fmt.Println("==========================")
-	//insertRowDemo()
-	fmt.Println("==========================")
-	updateRowDemo()
-	fmt.Println("==========================")
-	deleteRowDemo()
+	id, err := sonyflake.GetId()
+	if err != nil {
+		fmt.Printf("GetId snowflake failed, err:%v\n", err)
+		return
+	}
+	fmt.Println("id:", id)
 }
