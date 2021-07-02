@@ -15,8 +15,7 @@ func getMachineID() (uint16, error) {
 	return sonyMachineID, nil
 }
 
-// 需要传入当前的机器ID
-
+// Init 需要传入当前的机器ID
 func Init(machineId uint16) (err error) {
 	sonyMachineID = machineId
 	t, _ := time.Parse("2006-01-02", "2021-07-01")
@@ -28,8 +27,7 @@ func Init(machineId uint16) (err error) {
 	return
 }
 
-// GetId生成的id返回值
-
+// GetId 生成的id返回值
 func GetId() (id uint64, err error) {
 	if sonyFlake == nil {
 		err = fmt.Errorf("snoy flake not inited")
