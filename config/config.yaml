@@ -1,9 +1,9 @@
 mode: "dev"
 port: 9091
 
-og:
+log:
   level: "debug"
-  filename: "./log/con_system.log"
+  filename: "../log/info.log"
   max_size: 1000
   max_age: 3600
   max_backups: 5

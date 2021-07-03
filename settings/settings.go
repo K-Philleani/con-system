@@ -10,7 +10,7 @@ var Conf = new(AppConfig)
 
 type AppConfig struct {
 	Mode         string `mapstruct:"mode"`
-	Port         string `mapstruct:"port"`
+	Port         int    `mapstruct:"port"`
 	*LogConfig   `mapstructure:"log"`
 	*MySQLConfig `mapstructure:"mysql"`
 }
