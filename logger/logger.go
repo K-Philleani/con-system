@@ -2,6 +2,7 @@ package logger
 
 import (
 	"con-system/settings"
+	"fmt"
 	"net"
 	"net/http"
 	"net/http/httputil"
@@ -19,7 +20,8 @@ import (
 var lg *zap.Logger
 
 func Init(cfg *settings.LogConfig, mode string) (err error) {
-	writeSyncer := getLogWriter("./log/info.log", cfg.MaxSize, cfg.MaxBackups, cfg.MaxAge)
+	fmt.Println("ginfi", cfg)
+	writeSyncer := getLogWriter(cfg.Filename, cfg.MaxSize, cfg.MaxBackups, cfg.MaxAge)
 	encoder := getEncoder()
 	var l = new(zapcore.Level)
 	err = l.UnmarshalText([]byte(cfg.Level))
@@ -90,8 +92,6 @@ func GinRecovery(stack bool) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		defer func() {
 			if err := recover(); err != nil {
-				// Check for a broken connection, as it is not really a
-				// condition that warrants a panic stack trace.
 				var brokenPipe bool
 				if ne, ok := err.(*net.OpError); ok {
 					if se, ok := ne.Err.(*os.SyscallError); ok {
@@ -100,15 +100,13 @@ func GinRecovery(stack bool) gin.HandlerFunc {
 						}
 					}
 				}
-
 				httpRequest, _ := httputil.DumpRequest(c.Request, false)
 				if brokenPipe {
 					lg.Error(c.Request.URL.Path,
 						zap.Any("error", err),
 						zap.String("request", string(httpRequest)),
 					)
-					// If the connection is dead, we can't write a status to it.
-					c.Error(err.(error)) // nolint: errcheck
+					c.Error(err.(error))
 					c.Abort()
 					return
 				}

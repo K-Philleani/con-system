@@ -2,6 +2,7 @@ package settings
 
 import (
 	"fmt"
+
 	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/viper"
 )
@@ -27,7 +28,7 @@ type MySQLConfig struct {
 
 type LogConfig struct {
 	Level      string `mapstructure:"level"`
-	Filename   string `mapstructure:"filname"`
+	Filename   string `mapstructure:"filename"`
 	MaxSize    int    `mapstructure:"max_size"`
 	MaxAge     int    `mapstructure:"max_age"`
 	MaxBackups int    `mapstructure:"max_backups"`

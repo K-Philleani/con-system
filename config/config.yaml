@@ -3,7 +3,7 @@ port: 9091
 
 log:
   level: "debug"
-  filename: "../log/info.log"
+  filename: "./log/info.log"
   max_size: 1000
   max_age: 3600
   max_backups: 5
