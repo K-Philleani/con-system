@@ -1,3 +1,21 @@
 {"level":"INFO","time":"2021-07-04T15:24:14.437+0800","caller":"logger/logger.go:45","msg":"init logger success"}
 {"level":"INFO","time":"2021-07-04T15:24:19.319+0800","caller":"logger/logger.go:77","msg":"/ping","status":200,"method":"GET","path":"/ping","query":"","ip":"::1","user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36","errors":"","cost":0.000108054}
 {"level":"INFO","time":"2021-07-04T15:24:19.394+0800","caller":"logger/logger.go:77","msg":"/favicon.ico","status":200,"method":"GET","path":"/favicon.ico","query":"","ip":"::1","user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36","errors":"","cost":0.000198268}
+{"level":"INFO","time":"2021-07-04T22:38:07.867+0800","caller":"logger/logger.go:45","msg":"init logger success"}
+{"level":"INFO","time":"2021-07-04T22:38:14.020+0800","caller":"logger/logger.go:77","msg":"/signup","status":200,"method":"POST","path":"/signup","query":"","ip":"::1","user-agent":"PostmanRuntime/7.28.0","errors":"","cost":0.000920459}
+{"level":"INFO","time":"2021-07-04T22:45:15.929+0800","caller":"logger/logger.go:45","msg":"init logger success"}
+{"level":"ERROR","time":"2021-07-04T22:45:22.596+0800","caller":"controller/user.go:30","msg":"SignupHandler with validate params"}
+{"level":"INFO","time":"2021-07-04T22:45:22.596+0800","caller":"logger/logger.go:77","msg":"/signup","status":200,"method":"POST","path":"/signup","query":"","ip":"::1","user-agent":"PostmanRuntime/7.28.0","errors":"","cost":0.001532162}
+{"level":"INFO","time":"2021-07-04T22:46:44.988+0800","caller":"logger/logger.go:45","msg":"init logger success"}
+{"level":"ERROR","time":"2021-07-04T22:47:09.794+0800","caller":"controller/user.go:20","msg":"SignupHandler with validate params","error":"invalid character '}' looking for beginning of object key string"}
+{"level":"INFO","time":"2021-07-04T22:47:09.794+0800","caller":"logger/logger.go:77","msg":"/signup","status":200,"method":"POST","path":"/signup","query":"","ip":"::1","user-agent":"PostmanRuntime/7.28.0","errors":"","cost":0.000334899}
+{"level":"ERROR","time":"2021-07-04T22:47:27.526+0800","caller":"controller/user.go:30","msg":"SignupHandler with validate params"}
+{"level":"INFO","time":"2021-07-04T22:47:27.527+0800","caller":"logger/logger.go:77","msg":"/signup","status":200,"method":"POST","path":"/signup","query":"","ip":"::1","user-agent":"PostmanRuntime/7.28.0","errors":"","cost":0.000321179}
+{"level":"INFO","time":"2021-07-04T22:48:04.419+0800","caller":"logger/logger.go:45","msg":"init logger success"}
+{"level":"INFO","time":"2021-07-04T22:50:22.146+0800","caller":"logger/logger.go:45","msg":"init logger success"}
+{"level":"ERROR","time":"2021-07-04T22:50:27.193+0800","caller":"controller/user.go:30","msg":"SignupHandler with validate params(validate)"}
+{"level":"INFO","time":"2021-07-04T22:50:27.194+0800","caller":"logger/logger.go:77","msg":"/signup","status":200,"method":"POST","path":"/signup","query":"","ip":"::1","user-agent":"PostmanRuntime/7.28.0","errors":"","cost":0.000457156}
+{"level":"INFO","time":"2021-07-04T22:50:42.018+0800","caller":"logger/logger.go:77","msg":"/signup","status":200,"method":"POST","path":"/signup","query":"","ip":"::1","user-agent":"PostmanRuntime/7.28.0","errors":"","cost":0.000070892}
+{"level":"INFO","time":"2021-07-04T22:52:50.631+0800","caller":"logger/logger.go:45","msg":"init logger success"}
+{"level":"INFO","time":"2021-07-04T22:52:53.945+0800","caller":"controller/user.go:37","msg":"请求数据","username":"kk","password":"123456","re_password":"123456"}
+{"level":"INFO","time":"2021-07-04T22:52:53.945+0800","caller":"logger/logger.go:77","msg":"/signup","status":200,"method":"POST","path":"/signup","query":"","ip":"::1","user-agent":"PostmanRuntime/7.28.0","errors":"","cost":0.000571774}
