@@ -1,6 +1,7 @@
 package main
 
 import (
+	"con-system/controller"
 	"con-system/dao/mysql"
 	"con-system/logger"
 	"con-system/pkg/sonyflake"
@@ -48,6 +49,11 @@ func main() {
 		return
 	}
 	fmt.Println("id:", id)
+
+	if err := controller.InitTrans("zh"); err != nil {
+		fmt.Printf("init trans failed, err:%v\n", err)
+		return
+	}
 
 	// 注册路由
 	r := router.SetupRouter()
