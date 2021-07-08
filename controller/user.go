@@ -45,13 +45,19 @@ func SignupHandler(c *gin.Context) {
 	//	return
 	//}
 	zap.L().Info("请求数据", zap.String("username", p.Username), zap.String("password", p.Password), zap.String("re_password", p.RePassword))
-	fmt.Println("p", p)
 	// 2.业务处理
-	logic.SignUp(p)
+	if err := logic.SignUp(p); err != nil {
+		fmt.Println("err:", err)
+		c.JSON(http.StatusOK, gin.H{
+			"code":    1,
+			"message": err.Error(),
+		})
+		return
+	}
 
 	// 3.返回响应
 	c.JSON(http.StatusOK, gin.H{
-		"msg": "OK",
+		"msg": "注册成功",
 	})
 
 }

@@ -6,11 +6,23 @@ import (
 	"con-system/pkg/sonyflake"
 )
 
-func SignUp(p *models.ParamSignup) {
+func SignUp(p *models.ParamSignup) (err error) {
 	// 1.判断用户是否存在
-	mysql.QueryUserById()
+	err = mysql.CheckUserExist(p.Username)
+	if err != nil {
+		return err
+	}
 	// 2.生成uid
-	sonyflake.GetId()
-	// 3.保存进数据库
-	mysql.InsertUser()
+	userId, err := sonyflake.GetId()
+	// 3.构造一个User实例
+	u := models.User{
+		UserId:   userId,
+		UserName: p.Username,
+		Password: p.Password,
+	}
+	// 4.保存进数据库
+	if err = mysql.InsertUser(&u); err != nil {
+		return
+	}
+	return
 }

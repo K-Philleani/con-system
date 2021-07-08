@@ -9,11 +9,11 @@ log:
   max_backups: 5
 
 mysql:
-  host: 124.70.71.78
+  host: 1.117.147.234
   port: 3306
   user: root
   password: 123456
-  db: cons
+  db: db1
   max_open_conns: 100
   max_idle_conns: 20
 

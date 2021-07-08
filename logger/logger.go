@@ -2,7 +2,6 @@ package logger
 
 import (
 	"con-system/settings"
-	"fmt"
 	"net"
 	"net/http"
 	"net/http/httputil"
@@ -20,7 +19,6 @@ import (
 var lg *zap.Logger
 
 func Init(cfg *settings.LogConfig, mode string) (err error) {
-	fmt.Println("ginfi", cfg)
 	writeSyncer := getLogWriter(cfg.Filename, cfg.MaxSize, cfg.MaxBackups, cfg.MaxAge)
 	encoder := getEncoder()
 	var l = new(zapcore.Level)
@@ -42,7 +40,6 @@ func Init(cfg *settings.LogConfig, mode string) (err error) {
 
 	lg = zap.New(core, zap.AddCaller())
 	zap.ReplaceGlobals(lg)
-	zap.L().Info("init logger success")
 	return
 }
 
