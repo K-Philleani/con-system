@@ -2,6 +2,7 @@ package logger
 
 import (
 	"con-system/settings"
+	"fmt"
 	"net"
 	"net/http"
 	"net/http/httputil"
@@ -69,6 +70,9 @@ func GinLogger() gin.HandlerFunc {
 		start := time.Now()
 		path := c.Request.URL.Path
 		query := c.Request.URL.RawQuery
+		for k, v := range c.Request.PostForm {
+			fmt.Println("k:", k, "v:", v)
+		}
 		c.Next()
 		cost := time.Since(start)
 		lg.Info(path,

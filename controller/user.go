@@ -61,3 +61,37 @@ func SignupHandler(c *gin.Context) {
 	})
 
 }
+
+// LoginHandler 处理登录请求的函数
+func LoginHandler(c *gin.Context) {
+	var u models.ParamLogin
+	if err := c.ShouldBindJSON(&u); err != nil {
+		// 记录日志
+		zap.L().Error("LoginHandler with validate params(ShouldBindJSON)", zap.Error(err))
+		errs, ok := err.(validator.ValidationErrors)
+		if !ok {
+			// 非validator.ValidationErrors类型错误直接返回
+			c.JSON(http.StatusOK, gin.H{
+				"msg": err.Error(),
+			})
+			return
+		}
+		c.JSON(http.StatusOK, gin.H{
+			"code": 1,
+			"msg":  removeTopStruct(errs.Translate(trans)),
+		})
+		return
+	}
+	if err := logic.Login(u); err != nil {
+		zap.L().Error("logic.Login failed: ", zap.String("username:", u.Username), zap.Error(err))
+		c.JSON(http.StatusOK, gin.H{
+			"code":    1,
+			"message": "用户名或密码错误",
+		})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"code":    200,
+		"message": "登录成功",
+	})
+}
